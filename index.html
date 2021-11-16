@@ -1,0 +1,482 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+
+	<title>QGIS Training</title>
+
+	    <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+	    <meta name="author" content="Hakim El Hattab">
+
+	    <meta name="apple-mobile-web-app-capable" content="yes">
+	    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	    <link rel="stylesheet" href="css/reveal.css">
+	    <link rel="stylesheet" href="css/theme/youthMappers.css" id="theme">
+
+	    <!-- Theme used for syntax highlighting of code -->
+	    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+	    <!-- Printing and PDF exports -->
+	    <script>
+	        var link = document.createElement( 'link' );
+		    link.rel = 'stylesheet';
+		    link.type = 'text/css';
+		    link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+		        document.getElementsByTagName( 'head' )[0].appendChild( link );
+	    </script>
+    </head>
+
+    <body>
+        <div class="reveal">
+            <div class="slides">
+		    
+                <section>
+	            <h1>Introduction to GIS and QGIS</h1>
+		    <h2>YouthMappers</h2>
+		    <h3>November 16th, 2021</h3>
+
+                    <aside class="notes">
+                    Good Whatever time of day it is! I am so glad you were able to join myself and my co-presenter today!  To start my name is Rory Nealon and I am the activity manager for the YouthMappers program at the US Agency for International Development or USAID, the Federal office in charge of coordinating the United State's assistance to the rest of world.  At USAID I work at the GeoCenter which applies a geographic approach to internatinoal development.  The office helps USAID Missions around the world and Bureaus in DC use geospatial technology for data analysis and visualizations.
+		    </aside>
+	        </section>
+
+		<section>
+		    <h2>Objectives, Schedule, Expectations</h2>
+		    <aside class="notes">
+	            To start lets go over the training's objectives and schedule and set some expectations.
+		    </aside>
+		</section>
+
+		<section>
+		    <h3><b>Course Objectives</b>: To get a basic understing of geographic principles allowing you to use GIS software to manipulate, transform and style data to make maps that displays data with integretiy and helps answer questions. </h3>
+		</section>
+
+		<section>
+			<h2>Schedule</h2>
+			<h4>
+			<ul>
+			    <li>Geography + GIS Basics </li>
+			    <!-- <li>Exporting OSM Data</li> -->
+			    <li>QGIS Bascis</li>
+			    <li>Geospatial Analysis Basics</li>
+			</ul>
+			</h4>
+		</section>
+
+		<section>
+		<h2>Expectations</h2>
+		<h4>
+		    <ul>
+		        <li>Listen!...if you aren't listening then why are you here?</li>
+		        <li>Participate...you will learn more that way</li>
+		        <li>Ask questions when you are stuck</li>
+		        <li>Be nice!  We have a lot of different background and skills at this training</li>
+		    </ul>
+		</h4>
+		</section>
+
+		<section>
+		    <h2>What are Maps?</h2>
+		</section >
+		    <!--<img src="img/the_cartographer.png">-->
+		<section data-background-image="img/the_geographer_vermeer.jpg">
+                    <aside class="notes">
+			    As you can see from Johannes Vermeer's ~1668 painting titled <i>The Geographer</i>, they used to be painstaking hand drawn documents.  Lucky for you and me, since the 1980s maps have mostly made with the help of computers.
+		    </aside>
+		</section>
+
+		<section>
+		    <img src="img/weatherMap.png" style="height:100%;">
+		    <aside class="notes">
+		        Maps made on computers are built from different datasets.  This data can be a single point, a collection of polygons, or a photo like recording of color and temperatures.  The map on this slides consists of point vector data for the location of cities, line vector data for the states, and a raster dataset to represent the percentage of days the temperature exceeded 0 or 100 degrees farenheit.
+		    </aside>
+		</section>
+
+		<section>
+		    <img src="img/symbolization.png">
+		    <aside class="notes">
+                        With data we calculate numbers and make pictures (like a maps!). When calculations are preformed on data we <i>analyze</i> it.  This means we transform the data by doing things like aggregating, summarzing it.  The process of making a picture from data is called <i>symbolization</i> this is when you make decisions on what visual element will represent different parts of the dataset.
+		    </aside>
+		</section>
+
+		<section>
+		    <img src="img/garf.gif">
+                    <aside class="notes">
+		        Symbolization and analysis are the two parts needed to make a map.  This training will introduce you to these basic concepts and then have you apply different techniques for symbolization and analysis. But before we do that... why should we even care about  maps in the first place?
+		    </aside>
+		</section>
+
+	        <section>
+	            <h2>Why Maps?</h2>
+		    <aside class="notes">
+                        But why maps in the first place?
+                    </aside>
+	        </section>
+
+	        <section>
+	            <h3>They look cool!</h3>
+		    <img src="img/amsterdamBuildingsAge.jpg" style="height:90%; width:90%;">
+		    <aside class="notes">
+	            They are cool!  This is a map of Amsterdam in the Netherlands color cordinated for the date each building in the city was built.
+		    </aside> 
+		</section>
+
+	        <section>
+	            <h3>They are informative</h3>
+		    <img src="img/eu_according_to_the_usa.png" style="height:80%; width:80%;">
+		    <aside class="notes">
+		       Maps contain useful information that tells a story.  This is a humours map showing American's prejudices about Europe.    
+		    </aside>
+		</section>
+
+	        <section>
+		    <h3>They are useful tools</h3>
+		    <img src="img/map_on_phone.jpeg" style="height:80%; width:80%;">
+		    <aside class="notes">
+                        Maps are useful tools for understanding our planet.  They have and are being integrated into different devices and geospatial tec
+	            </aside>
+		</section>
+
+		<section>
+		    <h3>But hasn't the entire world been explored and mapped?</h3>
+		    <aside class="notes">
+	                A lot of people outside of the geospatial world will ask you hasn't the entire world been mapped?
+	            </aside>
+		</section>
+
+		<section>
+		    <h3>No!!! Our planet is dynamic and ever changing.</h3> 
+		    <aside class="notes">
+	                We obviously know that they are wrong. Since our planet and the forces on it are dynamic and ever changing.
+		    </aside>
+		</section>
+
+		<section>
+		    <h3>Humans and natural forces continue to shape & change the earth, and better technology let us map it more accurately.</h3>	
+		    <img src="img/shrinking_ice_caps.jpeg" style="height:80%; width: 80%;">
+		    <aside class="notes">
+                        The world is always changing from manmade forces and natural ones.  Humans are also building better tools to more accurately measure, map, and quantify the world.		    
+		    </aside>
+		</section>
+
+		<section data-background-image="img/mississippiMap.jpg">
+                    <aside class="notes">
+	            And I will end the intro section with one of my favorite maps to highlight the point that we need to keep making maps.  This is a map of the Mississippi river, the longest river in America, and this shows how much the course of that river has changed over time.  This is interesting becuase the border between the states of Mississippi and Lousiana are fixed on the boundary of the river, when it changes course it creates small enclaves that the states have to trade back and forth.
+		    </aside>
+		</section>
+
+                <section>
+		    <h2>Geography Basics</h2>
+		</section>
+				
+		<section>
+	            <h3>Maps are representations of the real world.  This includes things that can be seen as well as representations of things that cannot.</h3>
+		    <aside class="notes">
+		        Maps are representation of the real world, things that can be seen, like oceans, rivers, lakes, mountains, roads, buildings...and things that cannot be seen, like international boundaries, temperature, air pollution.
+		    </aside>
+		</section>
+
+		<section>
+		    <h3>The world is shaped as a(n): _______.</h3>
+		    <aside class="notes">
+		        The shape of the word is a ....?
+		    </aside>
+		</section>
+
+		<section>
+		    <h3>The world is shaped as a(n): <u>ellipsoid.</u></h3>
+		    <aside class="notes">
+		        The world is shaped like an ellipsoid as it is not a perfect sphere and is definately not flat!
+		    </aside>
+		</section>
+
+		<section>
+		    <h3>Hard to put a 3D object (like an ellipsoid) on a 2D plane.</h3>
+		    <aside class="notes">
+		        Its difficult to take a 3D object like the earth and transform it so it fits on a 2D plane (like a map).
+		    </aside>
+		</section>
+
+		<section>
+		    <h2>You have to rip, strech, or perform another distortions</h3>
+		    <img src="img/orange_maps.png">
+		    <aside class="notes">
+		        A good representation of this is taking an orange peel and trying flatten it...you can't without distoring it a lot.  This is true with maps and map projections.  You have to distort the earth's geography to get it to fit onto the 2D plane of a map.  When selecting a project you have to make a compromise between preserving a map's shape and its area...you cannot have both in perfect alignment.
+		    </aside>
+		</section>
+
+                <section>
+                    <h3><b>Coordinates</b> are the x,y values given to a particular location on a map. These are called longitude and latitude.</h3>
+                    <img src="img/lat_long.gif">
+		    <aside class="notes">
+		    Coordinates are the x,y values given to a location on a map.  Geographers call them Longitude and Latitude.  Latitude runs around the earth east to west but moves north and south.  Longitude runs north to south but moves east and west	    
+	            </aside>
+                </section>
+
+		<section>
+                  <h3><b>Geocoding</b> is when you take text data like "Sierra Leone" and associate points with it.  This is what google maps or OpenStreetMaps does when you search for a location</h3>
+		<aside class="notes">
+	        Geocoding is when you take text and get lat/longs...like if you were to seach for Sierra Leone in google maps it would return the coordinates of the country.
+		</aside>
+		</section>
+
+                <section>
+                    <h3><b>Reverse Geocoding</b> Is when you take a longitude and a latitude and return a text value like "Sierra Leone"</h3>
+                    <aside class="notes">
+	            Reverse geocoding is the opposite.  Its when you give coordinates and the reverse geocoder gives you the name of what is there.
+		    </aside>
+		</section>
+
+		<section>
+		    <h3>Everything is related to everything else but near things are more related than distant things.
+		    <i>-Waldo Tobler</i>
+		    </h3>
+		    <aside class="notes">
+		        Geography has only one law and it was written by Waldo Tobler. It states that: <i>Everything is related to everything else but near things are more related than distant things. </i>
+		    </aside>
+		</section>
+
+		<section>
+		    <h2>GIS Basics</h2>
+		    <aside class="notes">
+		        Now that we have some basic geographic techniques down, lets get started with some basic GIS concepts.
+		    </aside>
+		</section>
+
+		<section>
+		    <h3>Geographic phenomena on our map can be <i>discrete</i> or <i>continuous</i>.</h3>
+		    <aside class="notes">
+		        The geographic phenomena we want to map can be <i>discrete</i> or <i>continuous</i>.
+		    </aside>
+		</section>
+
+		<section>
+		    <h3>Continuous types changes gradually, not abruptly ex: temperature, elevation, salinity.</h3>
+		    <img src="img/continuous_data.gif" style="height:60%; width: 60%;">
+		    <aside class="notes">
+		        Continous geographic phenomena changes gradually and is not abrupt.  This can be for things like temperature, elevation, water salinity.
+		    </aside>
+		</section>
+
+		<section>
+		    <h3>Discrete types are divided into mutually exclusive parts, with all locations in one part having the same value.</h3>
+		    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Sierra_Leone%2C_administrative_divisions_-_de_-_colored_2018.svg/1024px-Sierra_Leone%2C_administrative_divisions_-_de_-_colored_2018.svg.png" style="height:30%; width: 30%;">
+		    <aside class="notes">
+		        Other types of geographic phenomena are discrete.  This means that they can be divided into distinct parts with everything in the value having the exact same value.  For example country boundaries are discrete as are a building's footprint, or a road.
+                    </aside>
+		</section>
+
+		<section>
+		    <h3>Different types of data can be used to represent our geographic phenomenon.</h3>
+		    <aside class="notes">
+		        To store and symbolize our geographic phenomenon there are different types of data.
+		    </aside>
+		</section>
+
+		<section>
+		    <h3>But you have to make sure that the right data is used to represent the right type of phenomenon!!!</h3>
+		    <aside class="notes">
+		        Matching our data to the right type of phenomenon is crucial.
+		    </aside>
+		</section>
+
+		<section>
+		    <h3>
+		        <ul>
+			    <li><b>Nominal Data</b> provides an identifier to discriminate between values.</li>
+			    <li><b>Ordinal Data</b> can be put in some natural sequence.</li>
+			    <li><b>Interval Data</b> allows for simple forms of computation like + and -.</li>
+			    <li><b>Ratio Data</b> allows for most, if not all, arithmetic computations.</li>
+			</ul>
+		    </h3>
+		    <aside class="notes">
+		    In general, our data can take four forms:  Nominal which provides an identifier to distinguish different values...an example would be the names of countries to dingish the differen boundaries from one another.  Ordinal data which can be put into a natural sequence  think data that would have high, medium, low associated with it.  Interval data which allows for simple forms of computation like addition and subtraction.  Examples of interval data would be: time, date, temperature, and ph scale.
+Finally, ration data which allows for most, if not all, arthmetic computations.  Think of different data that has a number associated with it like population statics broken down by gender or age.
+		</section>
+		
+		<section>
+	        <h2>GIS File Types</h2>
+		    <aside class="notes">
+		        Before I pass the presentation over to Christine, I will talk about how this data is stored.
+		    </aside>
+		</section>
+
+		<section>
+		    <h3>Map data is stored as a <i>Vector</i> or a <i>Raster.</i></h3>
+		    <aside class="notes">
+		        All of the different types of data we just discussed can be stored as a vector or raster file type.  However there is usally one format that is more efficant than the other.
+		    </aside>
+		</section>
+
+		<section>
+		    <h3>A raster is a set of regularly spaced cells with associated values.</h3>
+                    <h3>The value of the cell is assumed to be valid for all the area within it.</h3>
+		    <aside class="notes">
+		        A raster is a grid...regularly spaced cells with a value associated with it.  The value of the cell is assumed to be valid for all of the area within it.
+		    </aside>
+		</section>
+
+		<section>
+		    <img src="img/raster_example.jpeg">
+		    <aside class="notes">
+		        In this example you can see the black part of the grid that forms the face is given a value of 1 and the white cells a value of 0. 
+		    </aside>
+		</section>
+
+		<section>
+		    <img src="img/oregan_raster.png">
+		    <aside class="notes">
+		        This is a more complex example where you can see the state of Oregan in the USA and the pixels that make up this raster relate to elevation.
+		    </aside>
+		</section>
+
+		<section>
+		    <h3>Vectors, unlike rasters, attempt to explicitly georeference the geographic phenomena.</h3>
+		    <aside class="notes">
+		        The other type of way data is stored for GIS software are vectors.  Unlike rasters, vectors attempt to explicitly georeference the geographic phenomena they represent.
+		    </aside>
+		</section>
+
+		<section>
+		    <h3>They can be a single point (x, y)or(x, y, z).</h3>
+		    <img src="img/point_data.jpeg" style="height:65%; width: 65%;">
+		    <aside class="notes">
+		        Vectors can be a single point (x,y) or with a height (x,y,z)
+		    </aside>
+		</section>
+
+		<section>
+		    <h3>They can be a line. Which requires two or more nodes and a line drawn between them.</h3>
+		    <img src="img/line-vector.png">
+		    <aside class="notes">
+		       Vectors can also be a line which requires two or more ordered points (also called nodes) with a line drawn between them
+		    </aside>
+		</section>
+
+		<section>
+		    <h3>Another type of vectors are polygons. They are a collection of nodes and arcs.</h3>
+		    <img src="img/polytong_vector.png">
+                    <aside class="notes">
+                        Finally, vectors can be polygons.  These are a colletion of nodes with arcs connecting them.  The first and last node are the same point meaning that the it forms a closed shape.
+                    </aside>
+		</section>
+
+		<section>
+		    <h3>Each section of vector data can have thematic data associated with it.</h3>
+		    <aside class="notes">
+		    Each part of a vector dataset can have different thematic (also called attribute) data associated with it.  It can include nominal data like the name of the feature and ratio data like the area of the feature. And any type of data associated with it.
+		    </aside>
+		</section>
+
+		<section>
+		    <h3>Now we have some basic GIS principles down...lets get mapping!!!  Over to you Christine!</h3>
+		</section>
+		
+		<section>
+		    <h2>Exporting Data from OSM</h2>
+		</section>
+		<section>
+		    <h3>Over the years there has been a lot of different tools and websites developed for extracting data from OSM.  Today I will show you three of my favorite. </h3>
+		</section>
+		<section>
+		<h4>
+		    <ul>
+		        <li><a href="https://export.hotosm.org/en/v3/">HOT OSM Export Tool</a></li>
+		        <li><a href="https://overpass-turbo.eu/">Overpass Turbo</a></li>
+		        <li><a href="https://www.geofabrik">Geofabrik</a></li>
+		    </ul>
+		</h4>
+		</section>
+		<section>
+		    <h2>HOT Export Tool</h2>
+		    <h4>
+		        <ul>
+		        <li>Pros</li>
+		            <ul>
+		                <li>Easy to use</li>
+		                <li>Exports data in a variety of formats</li>
+		                <li>OSM data is catorigized into easy to understand categories</li>
+		            </ul>
+		        <li>Cons</li>
+		            <ul>
+		                <li>Can be slow when the OSM servers are busy or a lot of exports have been requested</li>
+		            </ul>
+		        </ul>
+		    </h4>
+		</section>
+		<section>
+		    <h2>Overpass Turbo</h2>
+		    <h4>
+		        <ul>
+		        <li>Pros</li>
+		            <ul>
+		                <li>Requires knowledge of OSM data structure</li>
+		                <li>You an view it before you download it!</li>
+		                <li>Can be incorporated into programming scripts</li>
+		                <li>Works very quickly for small datasets</li>
+		                <li>Has a wizard to assist with Queries</li>
+		                
+		            </ul>
+		        <li>Cons</li>
+		            <ul>
+		                <li>Requires learning a progamming language</li>
+		                <li>Requires knowledge of OSM data structure</li>
+		            </ul>
+		        </ul>
+		    </h4>
+		</section>
+		<section>
+		    <h2>GeoFabrik</h2>
+		    <h4>
+		        <ul>
+		        <li>Pros</li>
+		            <ul>
+		                <li>Provides standard ready to use GIS Files (.shps!)</li>
+		            </ul>
+		        <li>Cons</li>
+		            <ul>
+		                <li>"Fremium" model meaning data may be incomplete</li>
+		                <li>The data can be a little outdated</li>
+		            </ul>
+		        </ul>
+		    </h4>
+		</section>	
+
+	
+
+	<script src="lib/js/head.min.js"></script>
+	<script src="js/reveal.js"></script>
+
+	<script>
+
+	// More info https://github.com/hakimel/reveal.js#configuration
+	Reveal.initialize({
+		controls: true,
+		progress: true,
+		history: true,
+		center: true,
+
+		transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+		// More info https://github.com/hakimel/reveal.js#dependencies
+		dependencies: [
+	            { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+		    { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+		    { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+		    { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+		    { src: 'plugin/search/search.js', async: true },
+		    { src: 'plugin/zoom-js/zoom.js', async: true },
+		    { src: 'plugin/notes/notes.js', async: true }
+		    ]
+	});
+
+        </script>
+
+    </body>
+</html>
+</html>
+
